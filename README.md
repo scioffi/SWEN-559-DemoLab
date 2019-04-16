@@ -4,81 +4,24 @@
 
 Review the [notes from our lab](https://docs.google.com/presentation/d/1Uo52RZa-w3rvVPO4GVQK2MzgNEhg-A6bl8Id2Hy-jwU/edit?usp=sharing) to guide you.
 
-### Travis CI Setup
+## Lab Part 1
+
+**Step 1:** Fork repo at https://github.com/scioffi/SWEN-559-Test. You do not need to clone the repo or download anything. The entire lab can be completed using the GitHub web interface.
+
+**Step 2:** Set Up Travis. Create a new file in the root directory named `.travis.yml`.
 
 Add the following to your `.travis.yml`:
+
 ```yml
-language:
-  node_js
+language: node_js
 install:
   - npm install -g codecov
 script:
   - istanbul cover ./node_modules/mocha/bin/_mocha --reporter lcovonly -- -R spec
   - codecov
 ```
-The first script line will change depending on your coverage collecting tool, see below.
-### Produce Coverage Reports
-### [Mocha](http://mochajs.org/) + [Blanket.js](https://github.com/alex-seville/blanket)
-- Install [blanket.js](http://blanketjs.org/)
-- Configure blanket according to [docs](https://github.com/alex-seville/blanket/blob/master/docs/getting_started_node.md).
-- Run your tests with a command like this:
 
-```sh
-NODE_ENV=test YOURPACKAGE_COVERAGE=1 ./node_modules/.bin/mocha \
-  --require blanket \
-  --reporter mocha-lcov-reporter
-codecov
-```
-### [Mocha](http://mochajs.org/) + [JSCoverage](https://github.com/fishbar/jscoverage)
-
-Instrumenting your app for coverage is probably harder than it needs to be (read [here](http://www.seejohncode.com/2012/03/13/setting-up-mocha-jscoverage/)), but that's also a necessary step.
-
-In mocha, if you've got your code instrumented for coverage, the command for a travis build would look something like this:
-```sh
-YOURPACKAGE_COVERAGE=1 ./node_modules/.bin/mocha test -R mocha-lcov-reporter
-```
-
-### [Istanbul](https://github.com/gotwarlost/istanbul)
-
-**With Mocha:**
-
-```sh
-istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && codecov
-```
-
-**With Jasmine:**
-
-```sh
-istanbul cover ./node_modules/jasmine/bin/jasmine.js
-```
-
-***With Karma:***
-
-The `lcov.info` can be used as in other configurations. Some projects experienced better results using `json` output but it is no longer enabled by default. In `karma.config.js` both can be enabled:
-
-```javascript
-module.exports = function karmaConfig (config) {
-    config.set({
-        ...
-        reporters: [
-            ...
-            // Reference: https://github.com/karma-runner/karma-coverage
-            // Output code coverage files
-            'coverage'
-        ],
-        // Configure code coverage reporter
-        coverageReporter: {
-            reporters: [
-                // generates ./coverage/lcov.info
-                {type:'lcovonly', subdir: '.'},
-                // generates ./coverage/coverage-final.json
-                {type:'json', subdir: '.'},
-            ]
-        },
-        ...
-    });
-};
-```
+**Step 3:** Set up codecov. Codecov is a serive that provides coverage reports for your test suite. We will be using Jest as part of the suite so add both of those dependencies to `package.json`.
 
 In `package.json` supply either `lcov.info` or `coverage-final.json` to `codecov`:
 
@@ -87,23 +30,68 @@ In `package.json` supply either `lcov.info` or `coverage-final.json` to `codecov
   "scripts": {
     "report-coverage": "codecov",
     ...
+  },
+  "jest": {
+    "coverageDirectory": "./coverage/",
+    "collectCoverage": true
   }
   ...
-}
-```
-
-### [Jest](https://facebook.github.io/jest/)
-Add it in your package.json:
-```javascript
-"jest": {
-  "coverageDirectory": "./coverage/",
-  "collectCoverage": true
 }
 ```
 
 Jest will now generate coverage files into `coverage/`
 
 Run your tests with a command like this:
+
 ```sh
 jest && codecov
 ```
+
+**Step 4:** Set up Eslint. Eslint is a Javascript service that is used to ensure "clean-looking code"; it also ensures that the best practices are in play so the project can be consistent and worry-free.
+
+**Step 5:** Configure Codecov file. Create new file called `codecov.yml`. Write and save the following to that file:
+
+```yml
+codecov:
+  notify:
+    require_ci_to_pass: yes
+
+coverage:
+  precision: 2
+  round: down
+  range: "95...100"
+
+  status:
+    project: yes
+    patch: yes
+    changes: no
+
+parsers:
+  gcov:
+    branch_detection:
+      conditional: yes
+      loop: yes
+      method: no
+      macro: no
+
+comment:
+  layout: "header, diff"
+  behavior: default
+  require_changes: no
+```
+
+## Lab Part 2
+
+**Step 1:** Create a new branch called `team-x` where x is your group number.
+
+**Step 2:** Commit new changes to the team branch and push to your forked repo remote branch.
+
+**Step 3:** Navigate to https://github.com/scioffi/SWEN-559-Test/pulls and click `New Pull Request`
+
+**Step 4:** Once you open the PR, you should see your TravisCI build kicking off which checks for several things.
+One of those checks will fail (linting error). Utilize your resources to fix the error and update your pull request on GitHub with a fix to the branch.
+
+**Step 5:** Edit `.travis.yml` to include `npm run test`. Save and commit this file to the same branch. The pull request should update.
+Committing to the branch with the open PR will kick the checks off again and now this time it will run unit tests.
+
+**Step 6:** You see one of the checks fails due to poor testing. Click on the "details" link in the corner of the TravisCI widget on the GitHub pull request. This will pull up the build failure and explain what exactly went wrong. Fix the bug in the tests and re-commit the code.
