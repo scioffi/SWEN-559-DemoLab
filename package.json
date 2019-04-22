@@ -23,7 +23,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "jest --coverage",
-    "report-coverage": "codecov",
+    "test-with-reporting": "jest --coverage && codecov",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
