@@ -1,5 +1,6 @@
 # RIT SWEN-559 GitHub Continuous Integration Lab
 
+
 ## Pre-Lab
 
 Review the [notes from our lab](https://docs.google.com/presentation/d/1Uo52RZa-w3rvVPO4GVQK2MzgNEhg-A6bl8Id2Hy-jwU/edit?usp=sharing) to guide you.
