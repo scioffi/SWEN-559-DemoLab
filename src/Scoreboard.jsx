@@ -18,7 +18,7 @@ const ScLogo = styled.img`
 class Scoreboard extends React.Component {
   constructor(props){
     super(props);
-   
+
     this.state = {
       score: {
         "awayTeam": {
@@ -35,8 +35,8 @@ class Scoreboard extends React.Component {
 
   addRun = (team, curr) => {
     const awayTeam = this.state.score.awayTeam;
-    const homeTeam = state.score.homeTeam;
-    
+    const homeTeam = this.state.score.homeTeam;
+
     const runsAdded = 2;
 
     if (team === "awayTeam") {
