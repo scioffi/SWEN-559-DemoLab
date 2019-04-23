@@ -58,6 +58,7 @@ Under "Build Started" click the build that is open on your PR. See the trace of 
 
 ```yml
 script:
+  - npm install -g jest codecov
   - npm run build
   - npm run test-with-reporting
 ```
