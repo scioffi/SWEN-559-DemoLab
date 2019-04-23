@@ -37,7 +37,7 @@ class Scoreboard extends React.Component {
     const awayTeam = this.state.score.awayTeam;
     const homeTeam = this.state.score.homeTeam;
 
-    const runsAdded = 1;
+    const runsAdded = 2;
 
     if (team === "awayTeam") {
       awayTeam.runs += runsAdded;
