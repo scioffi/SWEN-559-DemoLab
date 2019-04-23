@@ -1,5 +1,4 @@
 codecov:
-  token: fe38f18b-4146-45fe-bf84-f1d0a677a1df
   notify:
     require_ci_to_pass: yes
 coverage:
