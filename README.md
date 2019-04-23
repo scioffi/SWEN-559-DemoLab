@@ -8,7 +8,7 @@ Review the [notes from our lab](https://docs.google.com/presentation/d/1Uo52RZa-
 
 **Step 1:** Log in to your team's GitHub account. Fork repo at https://github.com/scioffi/SWEN-559-Test. Clone repo locally to have code on your computer. Make sure the computer you're using has NodeJS, otherwise download the latest from here: https://nodejs.org/en/download/.
 
-**Step 2:** Locally, run `npm install` and then `npm start` to run the app. You will see errors in the code! 
+**Step 2:** `cd` into the SWEN-559-Test directory you just cloned in a terminal window and locally run `npm install` and then `npm start` to run the app. You will see errors in the code! 
 
 **Step 3:** Navigate back to GitHub in your browser and on the `master` branch perform the following steps:
 
