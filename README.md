@@ -33,6 +33,7 @@ script:
 Make sure to configure your lab GitHub email to the local repo as such: once you are `cd` in the forked directory on your machine, type the following commands: 
 
 `git config user.email "yourTeamGithubEmail"`
+
 `git config user.name "SomeNameGoesHere"`
 
 Commit and push the changes to a new branch and open a pull request against master on your forked repo. This should initiate a Travis CI build and the updates to the build will populate on the PR. View the PR and click `Details` next to the build that is running on the GitHub Travis CI integration widget.
