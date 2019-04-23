@@ -6,11 +6,11 @@ Review the [notes from our lab](https://docs.google.com/presentation/d/1Uo52RZa-
 
 ## Lab Part 1
 
-**Step 1:** Log in to your team's GitHub account. Fork repo at https://github.com/scioffi/SWEN-559-Test. Clone repo locally to have code on your computer. Make sure the computer you're using has NodeJS, otherwise download the latest from here: https://nodejs.org/en/download/.
+**Step 1:** Log in to your team's GitHub account. Fork repo at https://github.com/scioffi/SWEN-559-Test. Clone the FORKED repo locally to have code on your computer. Make sure the computer you're using has NodeJS, otherwise download the latest from here: https://nodejs.org/en/download/.
 
 **Step 2:** `cd` into the SWEN-559-Test directory you just cloned in a terminal window and locally run `npm install` and then `npm start` to run the app. You will see errors in the code! 
 
-**Step 3:** Navigate back to GitHub in your browser and on the `master` branch perform the following steps:
+**Step 3:** Navigate back to GitHub in your browser and perform the rest of the lab.
 
 ### Lab Part 1 (Travis CI)
 
@@ -22,15 +22,17 @@ IMPORTANT: On the install screen, select "Only Select Repositories" and pick the
 
 **Step 3:** Once redirected to the Travis CI website, sign in and authorize the application with GitHub.
 
-**Step 4:** Once redirected, select your repo and you will see it say "No tests have run".
+**Step 4:** Once redirected, select your repo and you will see it say "No builds for this repository".
 
-**Step 5:** Navigate back to the repository on GitHub. Open a new branch locally and the following to the bottom of the file `.travis.yml`:
+**Step 5:** Navigate back to the repository. Open the file `.travis.yml` and add the following code to the bottom of the file:
 
 ```yml
 script:
   - npm run build
 ```
-Push the changes to the branch and open a pull request against master on your forked repo. This should initiate a Travis CI build and the updates to the build will populate on the PR. View the PR and click `Details` next to the build that is running on the GitHub Travis CI integration widget.
+Make sure to configure your lab GitHub email to the local repo as such: once you are `cd` in the forked directory on your machine, type the following command `git config user.email "yourTeamGithubEmail"`.
+
+Commit and push the changes to a new branch and open a pull request against master on your forked repo. This should initiate a Travis CI build and the updates to the build will populate on the PR. View the PR and click `Details` next to the build that is running on the GitHub Travis CI integration widget.
 
 Under "Build Started" click the build that is open on your PR. See the trace of the build script running. The build will fail... leave the PR open and you will update it later.
 
